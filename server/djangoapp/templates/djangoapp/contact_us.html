@@ -1,9 +1,42 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+</head>
+<body>
+    <!--Add a nav bar here -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Dealership Review</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="nav-link btn btn-primary mx-4" href="{% url 'djangoapp:about' %}"> About Us </a>
+        <a class="nav-link btn btn-success mx-4" href="#"> Contact Us </a>
+        <a class="nav-link btn btn-info mx-4" href="{% url 'djangoapp:registration' %}"> Register </a>
+    </nav>
 
-    </head>
-    <body>
-        <h1>Contact Us!</h1>
-    </body>
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header text-center bg-primary text-white">
+                <h1>Contact Us!</h1>
+            </div>
+
+            <div class="card-body text-center bg-light">
+                <label class="h3"> Email: </label>
+                <div class = "h3"> cardealer@dealership.com </div>
+                <label class = "h3"> Phone Number: </label>
+                <div class = "h3"> 123-456-7890 </div>
+            </div>
+            <div class="card-footer text-center bg-primary text-white">
+                <h2>We are open 24/7!</h2>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
+            

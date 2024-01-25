@@ -1,9 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
     </head>
     <body>
-        <h1>About Us</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href= "{% url 'djangoapp:index' %}">Dealership Review</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="nav-link btn btn-primary mx-4" href=#> About Us </a>
+            <a class="nav-link btn btn-success mx-4" href="{% url 'djangoapp:contact' %}"> Contact Us </a>
+            <a class="nav-link btn btn-info mx-4" href="{% url 'djangoapp:registration' %}"> Register </a>
+        </nav>
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header text-center bg-primary text-white">
+                    <h1>About Us!</h1>
+                </div>
+                <div class="card-body text-center bg-light">
+                    <label class="h4 p-4"> 
+                        Welcome to Dealership Review, where we strive 
+                        to deliver an unparalleled user experience when 
+                        it comes to searching for and leaving reviews. Our 
+                        mission is to empower car buyers and enthusiasts with 
+                        reliable and insightful information to make informed decisions.
+                          
+                    </label>
+                    <label class = "h4 p-4">
+                        At Dealership Review, we understand the importance of finding 
+                        the perfect car dealership that meets your needs. 
+                        Our user-friendly platform allows you to effortlessly 
+                        search for dealerships based on location, ratings, and reviews. 
+                        We believe in transparency and authenticity, which is why our reviews 
+                        are submitted by real customers who have had firsthand experiences with the dealerships.
+                    </label>
+                    <label class = "h4 p-4">
+                        We are committed to providing a seamless and intuitive 
+                        interface that makes it easy for you to navigate through our website. 
+                        With our advanced search filters and interactive map, you can quickly 
+                        find the dealership that matches your preferences. Whether you're 
+                        looking for exceptional customer service, competitive pricing, or a wide 
+                        selection of vehicles, we've got you covered.
+                    </label>
+                    <label class = "h4 p-4">
+                        Leave your own reviews and contribute to our community of 
+                        car buyers and enthusiasts. Your feedback is invaluable in helping 
+                        others make informed decisions and ensuring that dealerships 
+                        maintain high standards of customer satisfaction. Together, 
+                        let's create a platform where everyone can find the best dealership experience possible.
+                    </label>
+                    <label class = "h4 p-4">
+                        Join us on this journey as we revolutionize the way car 
+                        buyers search for dealerships and share their experiences. 
+                        At Dealership Review, we are dedicated to providing an amazing 
+                        user experience that empowers you to make confident choices 
+                        in your car-buying journey. 
+                    </label>
+                </div>
+                <div class="card-footer text-center bg-primary text-white">
+                    <h2>Thank you for visiting!</h2>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

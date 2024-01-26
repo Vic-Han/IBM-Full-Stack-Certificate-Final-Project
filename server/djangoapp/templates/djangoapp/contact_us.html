@@ -10,14 +10,32 @@
 <body>
     <!--Add a nav bar here -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Dealership Review</a>
+        <a class="navbar-brand" href="% url 'djangoapp:index' username=username status=status%}">Dealership Review</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="nav-link btn btn-primary mx-4" href="{% url 'djangoapp:about' %}"> About Us </a>
-        <a class="nav-link btn btn-success mx-4" href="#"> Contact Us </a>
-        <a class="nav-link btn btn-info mx-4" href="{% url 'djangoapp:registration' %}"> Register </a>
+        <a class="nav-link btn btn-primary mx-4 btn-lg" href="{% url 'djangoapp:about' username=username status=status%}"> About Us </a>
+        <a class="nav-link btn btn-success mx-4 btn-lg" href="{% url 'djangoapp:contact' username=username status=status%}"> Contact Us </a>
+    {% if status == "logged in" %}
+        <div> {{username}}</div>
+        <a class="nav-link btn btn-info mx-4" href="{% url 'djangoapp:logout' %}"> Logout </a>
+    {% else %}
+        {% if status == "Incorrect username or password" %}
+            <div class = "text-danger"> {{status}}</div>
+        {% endif %}
+        <form action="{% url 'djangoapp:login' %}" method="post" class="form-inline">
+            {% csrf_token %}
+            <div class="form-group mb-2">
+                <input placeholder="username" type="text" name="username-input" class="form-control mx-sm-3">
+            </div>
+            <div class="form-group mb-2">
+                <input placeholder="password" type="password" name="password-input" class="form-control mx-sm-3">
+            </div>
+            <button type="submit" class="btn btn-info btn-lg"> Login </button>
+        </form>
+        <a class="nav-link btn btn-info mx-4 btn-lg" href="{% url 'djangoapp:registerpage' %}"> Register </a>
+    {% endif %}
     </nav>
 
     <div class="container">

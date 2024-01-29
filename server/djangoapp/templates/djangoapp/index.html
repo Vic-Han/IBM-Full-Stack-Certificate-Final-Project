@@ -44,7 +44,28 @@
         <a class="nav-link btn btn-info mx-4 btn-lg" href="{% url 'djangoapp:registerpage' %}"> Register </a>
     {% endif %}
     </nav>
-    <!--Add a dealer table here -->
+    <table class="table table-striped" id="table">
+        <thead>
+            <tr>
+                <th data-field="id">ID</th>
+                <th data-field="name">Dealership Name</th>
+                <th data-field="address">Address</th>
+                <th data-field="zip">Zip</th>
+                <th data-field="state">State</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dealer in dealership_list %}
+                <tr>
+                    <td>{{dealer.id}}</td>
+                    <td><a href="{% url 'djangoapp:dealer_details' username=username status=status dealer_id=dealer.id %}">{{dealer.full_name}}</a></td>
+                    <td>{{dealer.address}}</td>
+                    <td>{{dealer.zip}}</td>
+                    <td>{{dealer.state}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
     </body>
 

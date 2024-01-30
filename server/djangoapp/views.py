@@ -54,6 +54,7 @@ def contact(request, username, status):
 def login_view(request):
     username = request.POST['username-input']
     password = request.POST['password-input']
+
     context = {
         'username': username,
         'status' : ""
@@ -64,6 +65,7 @@ def login_view(request):
         return render(request, 'djangoapp/index.html', context)
     else:
         context ["status"] = "Incorrect username or password"
+        context["username"] = "none"
         return render(request, 'djangoapp/index.html', context)
         # Return an 'invalid login' error message.
 # Create a `logout_request` view to handle sign out request
@@ -86,9 +88,15 @@ def registration_request(request):
     password = request.POST['password-input']
     first_name = request.POST['firstname-input']
     last_name = request.POST['lastname-input']
+    url = "http://localhost:3000/dealerships/get"
+    # Get dealers from the URL
+    dealerships = get_dealers_from_cf(url)
+    # Concat all dealer's short name
+    #dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
     context = {
         'username': username,
-        'status' : "logged in"
+        'status' : "logged in",
+        'dealership_list': dealerships
     }
     
     user = User.objects.create_user(username = username, email = '', password = password)
@@ -99,15 +107,15 @@ def registration_request(request):
     return render(request, 'djangoapp/index.html', context)
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request, username, status):
-    url = "http://localhost:3000/dealerships/dealer/get"
+    url = "http://localhost:3000/dealerships/get"
     # Get dealers from the URL
     dealerships = get_dealers_from_cf(url)
     # Concat all dealer's short name
-    dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
+    #dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
     context = {
         'username': username,
         'status' : status,
-        'dealership_list': dealer_names
+        'dealership_list': dealerships
     }
     if request.method == "GET":
         return render(request, 'djangoapp/index.html', context)

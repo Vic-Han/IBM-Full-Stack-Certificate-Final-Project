@@ -3,7 +3,7 @@ from cloudant.query import Query
 from flask import Flask, jsonify, request
 import atexit
 # Add your Cloudant service credentials here
-cloudant_username = 'victor.han72@gmail.com'
+cloudant_username = '037d55d1-b4c8-44f4-bf6c-a43c537a8c39-bluemix'
 cloudant_api_key = '8x-7YGf9DUt7e0e8o6hBOSjOxrPn8H1-CfqIQVBa6Cwb'
 cloudant_url = 'https://037d55d1-b4c8-44f4-bf6c-a43c537a8c39-bluemix.cloudantnosqldb.appdomain.cloud'
 client = Cloudant.iam(cloudant_username, cloudant_api_key, connect=True, url=cloudant_url)

@@ -40,19 +40,35 @@
 
     <!-- Add reviews as cards -->
         <div class="container">
-
+            <div class ="row">
             {% for review in reviews %}
-                <div class = "card">
-                    <div class = "card-header">
-                        {{review.dealership}}
+                <div class = "col-4 mt-5 mx-3">
+                    <div class = "card">
+                        <div class = "card-header">
+                            {{review.dealership}}
+                        </div>
+                        <div class = "card-body">
+                            <h5 class = "card-title"> {{review.name}} </h5>
+                            <div class = "card-text">{{review.purchase}}</div>
+                            <div class = "card-text">{{review.purchase_date}}</div>
+                            <p class = "card-text"> {{review.review}} </p>
                     </div>
-                    <div class = "card-body">
-                        <h5 class = "card-title"> {{review.name}} </h5>
-                        <div class = "card-text">{{review.purchase}}</div>
-                        <div class = "card-text">{{review.purchase_date}}</div>
-                        <p class = "card-text"> {{review.review}} </p>
                 </div>
             {% endfor%}
+            </div>
+            <div class = "container">
+                {% if status == "logged in" %}
+                <div class = "row mt-5">
+                    <div class = "col-2 mx-auto">
+                        <a class="nav-link btn btn-info mx-4 btn-lg" href="{% url 'djangoapp:add_review' username=username status=status dealer_id=dealer_id%}"> Add Review </a>
+                    </div>
+                </div>
+                {% else %}
+                <div>
+
+                </div>
+                {% endif %}
+            </div>
         </div>
     </body>
 

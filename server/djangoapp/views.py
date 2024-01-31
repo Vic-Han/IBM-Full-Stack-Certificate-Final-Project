@@ -3,14 +3,16 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
+from .models import CarDealer, DealerReview
+
 # from .restapis import related methods
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
 import logging
 import json
-from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf
-
+from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, submit_review
+import requests
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
@@ -131,13 +133,52 @@ def get_dealer_details(request, username, status, dealer_id):
     }
     url = "http://localhost:5000/api/get_reviews"
     # Get dealers from the URL
-    reviews = get_dealers_from_cf(url, dealerId=dealer_id)
+    reviews = get_dealer_reviews_from_cf(url, dealerId=dealer_id)
     context['reviews'] = reviews
     if request.method == "GET":
         return render(request, 'djangoapp/dealer_details.html', context)
 
 # # Create a `add_review` view to submit a review
-def add_review(request, dealer_id):
-    url = "http://localhost:5000/dealerships/add-review"
+def add_review(request, username, status, dealer_id):
+    print("add review", username, status, dealer_id)
+    url = "http://localhost:3000/dealerships/get"
+    dealership = get_dealer_by_id_from_cf(url, dealer_id)
+
+    context = {
+        'username': username,
+        'status' : status,
+        'dealer_id': dealer_id,
+        'dealership': dealership,
+    }
+    if request.method == "GET":
+        return render(request, 'djangoapp/add_review.html', context)
 
 
+def post_review(request, username, status, dealer_id):
+    [review, purchase, purchase_date] = [request.POST['review-input'], request.POST['purchase-input'], request.POST['purchase-date-input']]
+    [car_make, car_model, car_year] = [request.POST['car-make-input'], request.POST['car-model-input'], request.POST['car-year-input']]
+    url = "http://localhost:3000/dealerships/get"
+    dealership = get_dealer_by_id_from_cf(url, dealer_id)
+    json_data = {   'id' : dealer_id, 
+                    'name' : username, 
+                    'dealership' : dealer_id, 
+                    'review' : review, 
+                    'purchase' : purchase, 
+                    'purchase_date' : purchase_date,
+                    'car_make' : car_make, 
+                    'car_model' : car_model,
+                    'car_year' : car_year,
+                }
+    url = "http://localhost:5000/api/post_review"
+    context = {
+        'username': username,
+        'status' : status,
+        'dealer_id': dealer_id,
+        'reviews': []
+    }
+    url = "http://localhost:5000/api/get_reviews"
+    # Get dealers from the URL
+    reviews = get_dealer_reviews_from_cf(url, dealerId=dealer_id)
+    context['reviews'] = reviews
+    if request.method == "POST":
+        return render(request, 'djangoapp/dealer_details.html', context)

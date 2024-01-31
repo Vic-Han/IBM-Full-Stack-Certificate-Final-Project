@@ -10,9 +10,7 @@ urlpatterns = [
     # name the URL
     #default route
     path(route = '', view = views.home, name = 'home'),
-    
     # path for about view
-
     path(route = 'about/<str:username>/<str:status>', view = views.about, name = 'about'),
     # path for contact us view
     path(route = 'contact/<str:username>/<str:status>', view = views.contact, name = 'contact'),
@@ -30,5 +28,8 @@ urlpatterns = [
     # path for dealer reviews view
     path(route='dealer/<str:username>/<str:status>/<int:dealer_id>', view=views.get_dealer_details, name='dealer_details'),
     # path for add a review view
+    path(route='add_review/<str:username>/<str:status>/<int:dealer_id>', view=views.add_review, name='add_review'),
+    # path for post a review view
+    path(route='dealers/<str:username>/<str:status>/<int:dealer_id>', view=views.post_review, name='post_review'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
